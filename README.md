@@ -35,7 +35,7 @@ Pebble game is a board game defined on a 1D grid that originally used to represe
 * doodle rule: you can doodle grid `i` only it when this grid has a pebble in it and grid `i+1` is red,
 * end rule: doodle all grids.
 
-The goal is to trigger game ending with the least number of steps, and the (approximately) optimal solution is the treeverse algorithm.
+The goal is to trigger game ending with the least number of steps (put rule), and the (approximately) optimal solution is the treeverse algorithm.
 
 ## Example
 For an example of using Treeverse in revese mode autodiff, please check the [test file](test/treeverse.jl).
