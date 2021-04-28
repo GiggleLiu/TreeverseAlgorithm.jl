@@ -7,7 +7,7 @@ Treeverse algorithm described in
 
 [Achieving logarithmic growth of temporal and spatial complexity in reverse automatic differentiation](https://www.tandfonline.com/doi/abs/10.1080/10556789208805505), 1992, By Andreas Griewank
 
-This is one of the corner stone of automatic differentiation towards solving the memory wall issue.
+This is one of the corner stones in automatic differentiation towards solving the memory wall issue.
 
 ```julia
 julia> using TreeverseAlgorithm
@@ -21,10 +21,11 @@ Treeverse peak memory = 6
 ```
 <img src="assets/treeverse-pebble-30-5.svg" width=300/>
 
-In this diagram, there are 31 columns representing state 0-30, and each row represents a single step forward computing. In each row,
-The black dot is the state computed in current step,
-empty dots are states deallocated in currect step,
-and gray dots are checkpoints stored in the global memory.
+In this diagram, there are 31 columns representing state 0-30.
+Each row represents a single step forward computing.
+In each row, there is one black dot representing the state computed in current step,
+several empty dots representing states deallocated in currect step,
+and some gray dots representing checkpoints stored in the global memory.
 Grids with red color means gradient has been computed.
 
 There is a theoretical model to understand what treeverse is doing here - the **checkpointing version pebble game**.
