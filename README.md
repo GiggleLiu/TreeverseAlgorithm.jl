@@ -7,7 +7,7 @@ Treeverse algorithm described in
 
 [Achieving logarithmic growth of temporal and spatial complexity in reverse automatic differentiation](https://www.tandfonline.com/doi/abs/10.1080/10556789208805505), 1992, By Andreas Griewank
 
-This is one of the corner stones in automatic differentiation towards solving the memory wall issue.
+Treeverse alorithm is one of the corner stones in automatic differentiation towards solving the memory wall issue, and this package aims to solve the memory wall issue in differentiating physics simulation. But, it has not been optimized for solving small scale problems or differentiating a general program.
 
 ```julia
 julia> using TreeverseAlgorithm
