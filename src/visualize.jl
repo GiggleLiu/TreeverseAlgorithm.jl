@@ -4,11 +4,11 @@ using .Viznet.Compose
 export treeverse_pebblegame
 
 @info "TreeverseAlgorithm: You just imported `Viznet`, you can use
-    * (image, nstep) = treeverse_finger_printing(N, δ)
+    * (image, nstep) = treeverse_pebblegame(N, δ)
 "
 
 """
-    (image, nstep) = treeverse_finger_printing(N, δ)
+    (image, nstep) = treeverse_pebblegame(N, δ)
 
 Returns a tuple of Context object (check Compose.jl) and the number of steps.
 Show to pebble game solution for treeverse algorithm, `N` is the total number of steps, `δ` is the number of checkpoints.
