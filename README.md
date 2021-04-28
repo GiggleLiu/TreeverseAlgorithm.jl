@@ -21,3 +21,19 @@ Treeverse peak memory = 6
 ```
 
 ![](assets/treeverse-pebble-30-5.svg | width=200)
+
+In this diagram, there are 31 columns representing state 0-30, and each row represents a single step forward computing. In each row,
+The black dot is the state computed in current step,
+empty dots are states deallocated in currect step,
+and gray dots are checkpoints stored in the global memory.
+Grids with red color means gradient has been computed.
+
+This graph is the (near) optimal solution for the **checkpointing version pebble game**.
+Pebble game is a board game defined on a 1D grid that originally used to represent the time-space tradeoff in reversible programming. The checkpointing version is: you have `S` pebbles and one red pen. At the beginning of the game, the first grid has a pebble and the last grid is doodled with red. In each step, you need to follow the following rules
+
+* put rule: Only if there exists a pebble in grid `i`, you can move a pebble from your own pool to the grid `i+1`,
+* take rule: you can take a pebble from the board any time,
+* doodle rule: you can doodle grid `i` only it when this grid has a pebble in it and grid `i+1` is red,
+* end rule: doodle all grids.
+
+The goal is to trigger game ending with the least number of steps.
