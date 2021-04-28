@@ -2,5 +2,5 @@ using TreeverseAlgorithm
 using Test
 
 @testset "TreeverseAlgorithm.jl" begin
-    # Write your tests here.
+    include("treeverse.jl")
 end
