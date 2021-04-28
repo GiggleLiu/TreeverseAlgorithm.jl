@@ -20,4 +20,6 @@ julia> treeverse_pebblegame(30, 5)[1]
 Treeverse peak memory = 6
 ```
 
-![](assets/treeverse-pebble-30-5.svg | width=200)
+<img src="assets/treeverse-pebble-30-5.svg" width=300/>
+
+For an example, please checkout the [test file](test/treeverse.jl)
