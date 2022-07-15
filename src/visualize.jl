@@ -13,7 +13,7 @@ export treeverse_pebblegame
 Returns a tuple of Context object (check Compose.jl) and the number of steps.
 Show to pebble game solution for treeverse algorithm, `N` is the total number of steps, `δ` is the number of checkpoints.
 """
-function treeverse_pebblegame(N::Int, δ)
+function treeverse_pebblegame(N::Int, δ; scale=1.0)
     x0 = 0.0
     logger = TreeverseLog()
     g_tv = treeverse(x->0.0, (x,z)->0.0, 0.0; N=N, δ=δ,logger=logger)
@@ -23,7 +23,7 @@ function treeverse_pebblegame(N::Int, δ)
     actions = copy(logger.actions)
     NY = count(a->a.action == :call, actions)+1
     Y = 1cm*NY
-    Compose.set_default_graphic_size(X, Y)
+    Compose.set_default_graphic_size(X*scale, Y*scale)
 
     img = canvas() do
         checkpoints = []
