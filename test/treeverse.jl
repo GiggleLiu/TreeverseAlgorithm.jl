@@ -1,6 +1,20 @@
 using TreeverseAlgorithm, Test, ForwardDiff
 using NiLang
 using NiLang.AD: GVar
+
+@testset "dumplog" begin
+    logger = TreeverseLog(TreeverseAlgorithm.TreeverseAction[], Ref(0), Ref(0))
+    push!(logger, :call, 1, 1, 1, 1)
+    push!(logger, :grad, 1, 1, 1, 1)
+    push!(logger, :store, 1, 1, 1, 1)
+    push!(logger, :fetch, 1, 1, 1, 1)
+    push!(logger, :call, 1, 1, 1, 1)
+    push!(logger, :grad, 1, 1, 1, 1)
+    dumplog(logger, "test.json")
+    logger2 = loadlog("test.json")
+    @test logger == logger2
+end
+
 @testset "treeverse" begin
     struct P3{T}
         x::T

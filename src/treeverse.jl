@@ -1,5 +1,3 @@
-export treeverse, treeverse!, TreeverseLog
-
 struct TreeverseAction
     action::Symbol
     τ::Int
@@ -25,6 +23,45 @@ function Base.show(io::IO, logger::TreeverseLog)
 | number of stack push/pop = $(count(x->x.action==:store, logger.actions))/$(count(x->x.action==:fetch, logger.actions))""")
 end
 
+"""
+    dumplog(logger::TreeverseLog, filename::String)
+
+Dump the TreeverseLog to a JSON file using JSON3.
+"""
+function dumplog(logger::TreeverseLog, filename::String)
+    # Convert RefValue to actual values for serialization
+    data = Dict(
+        "actions" => logger.actions,
+        "depth" => logger.depth[],
+        "peak_mem" => logger.peak_mem[]
+    )
+    
+    open(filename, "w") do io
+        JSON3.write(io, data)
+    end
+end
+
+"""
+    loadlog(filename::String)
+
+Load a TreeverseLog from a JSON file.
+"""
+function loadlog(filename::String)
+    data = JSON3.read(read(filename, String))
+    
+    actions = [TreeverseAction(
+        Symbol(action["action"]), 
+        action["τ"], 
+        action["δ"], 
+        action["step"], 
+        action["depth"]
+    ) for action in data["actions"]]
+    
+    logger = TreeverseLog(actions, Ref(data["depth"]), Ref(data["peak_mem"]))
+    return logger
+end
+
+
 function binomial_fit(N::Int, δ::Int)
     τ = 1
     while N > binomial(τ+δ, τ)
@@ -48,8 +85,7 @@ Treeverse algorithm for back-propagating a program memory efficiently.
 
 Positional arguments
 * `f`, the step function that ``s_{i+1} = f(s_i)``,
-* `gf`, the single step gradient function that ``g_i = gf(s_i, g_{i+1})``
-   !!! When ``g_{i+1}`` is `nothing`, it should return the gradient of the loss function,
+* `gf`, the single step gradient function that ``g_i = gf(s_i, g_{i+1})``. When ``g_{i+1}`` is `nothing`, it should return the gradient passed from the later step.
 * `s`, the initial state ``s_0``,
 
 Keyword arguments
