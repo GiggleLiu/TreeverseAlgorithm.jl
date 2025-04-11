@@ -4,15 +4,17 @@ using NiLang.AD: GVar
 
 @testset "dumplog" begin
     logger = TreeverseLog(TreeverseAlgorithm.TreeverseAction[], Ref(0), Ref(0))
-    push!(logger, :call, 1, 1, 1, 1)
-    push!(logger, :grad, 1, 1, 1, 1)
-    push!(logger, :store, 1, 1, 1, 1)
-    push!(logger, :fetch, 1, 1, 1, 1)
-    push!(logger, :call, 1, 1, 1, 1)
-    push!(logger, :grad, 1, 1, 1, 1)
+    push!(logger, :call, 1, 1, 1)
+    push!(logger, :grad, 1, 1, 1)
+    push!(logger, :store, 1, 1, 1)
+    push!(logger, :fetch, 1, 1, 1)
+    push!(logger, :call, 1, 1, 1)
+    push!(logger, :grad, 1, 1, 1)
     dumplog(logger, "test.json")
     logger2 = loadlog("test.json")
-    @test logger == logger2
+    @test logger.actions == logger2.actions
+    @test logger.depth[] == logger2.depth[]
+    @test logger.peak_mem[] == logger2.peak_mem[]
 end
 
 @testset "treeverse" begin
